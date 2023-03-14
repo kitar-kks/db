@@ -95,7 +95,7 @@ volumes:
   mongoDB-storage:
 
 
-networks:
-  default:
-    external:
-      name: auto-lets-encrypt
+# networks:
+#   default:
+#     external:
+#       name: auto-lets-encrypt
