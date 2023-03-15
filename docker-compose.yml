@@ -33,8 +33,10 @@ services:
     container_name: InfluxDB
     image: influxdb:1.8.9
     #    image: tutum/influxdb
-    expose:
-      - 8086
+    # expose:
+    #   - 8086
+    ports:
+      - 8086:8086
     volumes:
       - type: volume
         source: influxDB-storage
