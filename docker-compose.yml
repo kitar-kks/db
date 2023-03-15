@@ -21,7 +21,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "/usr/bin/mysql --user=root --password=Azbil@system123!",
+          "/usr/bin/mysql --user=root --password=energyDB@system123!",
           "--execute",
           'SHOW DATABASES'
         ]
