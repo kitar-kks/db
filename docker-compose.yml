@@ -43,6 +43,8 @@ services:
       # VIRTUAL_HOST: influx.azbil-dev.online
       # LETSENCRYPT_HOST: influx.azbil-dev.online
       # LETSENCRYPT_EMAIL: info@innotechdev.co.th
+      INFLUXDB_HTTP_AUTH_ENABLED: true
+      INFLUXDB_ADMIN_ENABLED: true
       INFLUXDB_ADMIN_USER: admin
       INFLUXDB_ADMIN_PASSWORD: energyDB@system123!
       INFLUXDB_DB: energyDB
