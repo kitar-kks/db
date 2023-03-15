@@ -77,7 +77,8 @@ services:
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_SERVER: mongoDB
+      # ME_CONFIG_MONGODB_SERVER: mongoDB
+      ME_CONFIG_MONGODB_SERVER: localhost
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
       ME_CONFIG_MONGODB_AUTH_USERNAME: root
