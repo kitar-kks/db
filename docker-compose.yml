@@ -12,8 +12,6 @@ services:
     #        target: /var/lib/mysql
     ports:
       - 3306:3306
-    networks:
-      - db
     environment:
       TZ: Asia/Bangkok
       MYSQL_DATABASE: energyDB
@@ -39,8 +37,6 @@ services:
     #   - 8086
     ports:
       - 8086:8086
-    networks:
-      - db
     volumes:
       - type: volume
         source: influxDB-storage
@@ -68,8 +64,6 @@ services:
     #        target: /data/db
     ports:
       - 27017:27017
-    networks:
-      - db
     environment:
       TZ: Asia/Bangkok
       MONGO_INITDB_ROOT_USERNAME: root
@@ -82,6 +76,7 @@ services:
       timeout: 1s
       retries: 5
 
+
 volumes:
   mariaDB-storage:
   influxDB-storage:
@@ -89,6 +84,6 @@ volumes:
 
 
 networks:
-  db:
-    driver: bridge
-    name: db_network
+  default:
+    external:
+      name: energy_core
