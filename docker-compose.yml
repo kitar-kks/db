@@ -12,6 +12,8 @@ services:
     #        target: /var/lib/mysql
     ports:
       - 3306:3306
+    networks:
+      - db
     environment:
       TZ: Asia/Bangkok
       MYSQL_DATABASE: energyDB
@@ -37,6 +39,8 @@ services:
     #   - 8086
     ports:
       - 8086:8086
+    networks:
+      - db
     volumes:
       - type: volume
         source: influxDB-storage
@@ -64,6 +68,8 @@ services:
     #        target: /data/db
     ports:
       - 27017:27017
+    networks:
+      - db
     environment:
       TZ: Asia/Bangkok
       MONGO_INITDB_ROOT_USERNAME: root
@@ -76,32 +82,13 @@ services:
       timeout: 1s
       retries: 5
 
-  # mongo-express:
-  #   container_name: Mongo-express
-  #   image: mongo-express
-  #   ports:
-  #     - 8081:8081
-  #   environment:
-  #     # ME_CONFIG_MONGODB_SERVER: mongoDB
-  #     ME_CONFIG_MONGODB_SERVER: 127.0.0.1
-  #     ME_CONFIG_MONGODB_PORT: 27017
-  #     ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
-  #     ME_CONFIG_MONGODB_AUTH_USERNAME: root
-  #     ME_CONFIG_MONGODB_AUTH_PASSWORD: energyDB@system123!
-  #     ME_CONFIG_BASICAUTH_USERNAME: admin
-  #     ME_CONFIG_BASICAUTH_PASSWORD: 1234
-  #     ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
-  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
-  #     ME_CONFIG_MONGODB_ADMINPASSWORD: energyDB@system123!
-  #   restart: always
-
 volumes:
   mariaDB-storage:
   influxDB-storage:
   mongoDB-storage:
 
 
-# networks:
-#   default:
-#     external:
-#       name: auto-lets-encrypt
+networks:
+  db:
+    driver: bridge
+    name: db_network
