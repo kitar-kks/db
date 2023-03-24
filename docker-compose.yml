@@ -5,7 +5,7 @@ services:
     image: mongo:latest
     volumes:
       - type: volume
-        source: /mongoDB-storage
+        source: mongoDB-storage
         target: /var/lib/mysql
     #      - type: bind
     #        source: ../volumes/MongoDB
