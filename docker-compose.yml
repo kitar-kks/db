@@ -1,67 +1,11 @@
 version: '3.7'
 services:
-  mariaDB:
-    container_name: MariaDB
-    image: mariadb:10.3
-    volumes:
-      - type: volume
-        source: mariaDB-storage
-        target: /var/lib/mysql
-    #      - type: bind
-    #        source: ../volumes/MariaDB
-    #        target: /var/lib/mysql
-    ports:
-      - 3306:3306
-    networks:
-      - db
-    environment:
-      TZ: Asia/Bangkok
-      MYSQL_DATABASE: energyDB
-      MYSQL_ROOT_PASSWORD: energyDB@system123!
-    restart: always
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "/usr/bin/mysql --user=root --password=energyDB@system123!",
-          "--execute",
-          'SHOW DATABASES'
-        ]
-      interval: 3s
-      timeout: 1s
-      retries: 5
-
-  influxDB:
-    container_name: InfluxDB
-    image: influxdb:1.8.9
-    #    image: tutum/influxdb
-    # expose:
-    #   - 8086
-    ports:
-      - 8086:8086
-    networks:
-      - db
-    volumes:
-      - type: volume
-        source: influxDB-storage
-        target: /var/lib/influxdb
-    environment:
-      # VIRTUAL_HOST: influx.azbil-dev.online
-      # LETSENCRYPT_HOST: influx.azbil-dev.online
-      # LETSENCRYPT_EMAIL: info@innotechdev.co.th
-      INFLUXDB_HTTP_AUTH_ENABLED: "true"
-      INFLUXDB_ADMIN_ENABLED: "true"
-      INFLUXDB_ADMIN_USER: admin
-      INFLUXDB_ADMIN_PASSWORD: energyDB@system123!
-      INFLUXDB_DB: energyDB
-    restart: always
-
   mongoDB:
     container_name: MongoDB
-    image: mongo:4.2
+    image: mongo:latest
     volumes:
       - type: volume
-        source: mongoDB-storage
+        source: /mongoDB-storage
         target: /var/lib/mysql
     #      - type: bind
     #        source: ../volumes/MongoDB
@@ -73,8 +17,8 @@ services:
     environment:
       TZ: Asia/Bangkok
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: energyDB@system123!
-      MONGO_INITDB_DATABASE: energyDB
+      MONGO_INITDB_ROOT_PASSWORD: asset123
+      MONGO_INITDB_DATABASE: asset_management
     restart: always
     healthcheck:
       test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
@@ -84,10 +28,7 @@ services:
 
 
 volumes:
-  mariaDB-storage:
-  influxDB-storage:
   mongoDB-storage:
-
 
 networks:
   db:
