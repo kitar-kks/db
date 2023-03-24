@@ -2,14 +2,14 @@ version: '3.7'
 services:
   mongoDB:
     container_name: MongoDB
-    image: mongo:latest
+    image: mongo:4.2
     volumes:
-      - type: volume
-        source: mongoDB-storage
-        target: /var/lib/mysql
-    #      - type: bind
-    #        source: ../volumes/MongoDB
-    #        target: /data/db
+      # - type: volume
+      #   source: mongoDB-storage
+      #   target: /var/lib/mysql
+         - type: bind
+           source: ../volumes/MongoDB
+           target: /data/db
     ports:
       - 27017:27017
     networks:
